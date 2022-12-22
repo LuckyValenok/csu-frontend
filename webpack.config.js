@@ -1,7 +1,7 @@
-const { NODE_ENV } = process.env;
+const {NODE_ENV} = process.env;
 const path = require('path');
 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -51,6 +51,30 @@ module.exports = {
                         options: {
                             name: '[name].[hash:8].[ext]',
                             outputPath: 'assets/',
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.less$/i,
+                use: [
+                    NODE_ENV === 'development'
+                        ? 'style-loader'
+                        : MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2,
+                            sourceMap: true,
+                        },
+                    },
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            sourceMap: true,
+                            lessOptions: {
+                                strictMath: true,
+                            },
                         },
                     },
                 ],
