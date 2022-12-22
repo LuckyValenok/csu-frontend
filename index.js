@@ -9,6 +9,7 @@ import 'core-js';
 import App from './src/App';
 
 import '@Styles/global.less';
+import 'reset-css';
 
 const root = ReactDOM.createRoot(document.getElementById('app-root'));
 
